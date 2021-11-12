@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Posting from "../views/Posting";
+import Create from "../views/Create";
+import Board from "../views/Board";
+import Detail from "../views/Detail";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Posting',
-    component: Posting
+    name: 'Board',
+    component: Board
+  },
+  {
+    path: '/create/:data?',
+    name: 'Create',
+    component: Create
+  },
+  {
+    path: '/create/:data',
+    name: 'Detail',
+    component: Detail
   }
 ]
 
