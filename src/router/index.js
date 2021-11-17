@@ -18,7 +18,7 @@ const routes = [
     component: Create
   },
   {
-    path: '/create/:data',
+    path: '/detail/:data',
     name: 'Detail',
     component: Detail
   }

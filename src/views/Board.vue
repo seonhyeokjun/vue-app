@@ -20,7 +20,13 @@
             :items-per-page="itemsPerPage"
             hide-default-footer
             @page-count="totalPages = $event"
-        ></v-data-table>
+        >
+          <template #item.title="{ item }">
+            <router-link :to="{ name : 'Detail', params: {data : item.id} }">
+              {{ item.title }}
+            </router-link>
+          </template>
+        </v-data-table>
       </v-card>
       <v-btn
           tile
@@ -31,13 +37,6 @@
           mdi-pencil
         </v-icon>
         Edit
-      </v-btn>
-      <v-btn
-          depressed
-          color="primary"
-          @click="googleLogin"
-      >
-        구글 로그인
       </v-btn>
       <div class="text-center">
         <v-pagination
@@ -68,7 +67,6 @@ export default {
   },
   created() {
     this.$http.get("/api/board/list").then((response) => {
-      console.log(response);
       this.board = response.data.content;
       this.totalPages = response.data.totalPages;
     })
@@ -103,19 +101,13 @@ export default {
       alert: false,
       page: 1,
       totalPages: 0,
-      itemsPerPage: 10
+      itemsPerPage: 10,
     };
   },
   computed: {
 
   },
   methods:{
-    detailPosting: function (data) {
-      this.$router.push({
-        name: "Detail",
-        params: {data:data},
-      })
-    },
     boardSearch: function () {
       if(this.search !== ''){
         this.$http.get("/api/board/search?keyword=" + this.search).then((res) => {
@@ -141,9 +133,6 @@ export default {
     },
     isEmptyArr: function (arr) {
       return Array.isArray(arr) && arr.length === 0;
-    },
-    googleLogin: function () {
-      window.location.href = "http://localhost:8080/oauth2/authorization/google";
     }
   }
 }

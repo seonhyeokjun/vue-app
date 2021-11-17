@@ -12,10 +12,39 @@
         <v-btn
             v-for="item in nav"
             :key="item.icon"
-            to="#"
+            :href="item.href"
             :title="item.title"
             text
         >{{ item.text }}</v-btn>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+                text
+                v-bind="attrs"
+                v-on="on"
+            >
+              메뉴
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+                v-for="(item, index) in login"
+                :key="index"
+                link
+                :href="item.href"
+                v-if="JSON.stringify(client) === '{}'"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              link
+              href="http://localhost:8080/logout"
+              v-if="JSON.stringify(client) !== '{}'"
+            >
+              <v-list-item-title>로그아웃</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-toolbar-items>
     </v-app-bar>
   </div>
@@ -31,13 +60,14 @@ export default {
           icon: 'home',
           text: 'Home',
           title: 'Back to Home page',
-          active: true
+          active: true,
         },
         {
           icon: 'info',
-          text: 'About',
+          text: '게시판',
           title: 'About this demo',
-          active: false
+          active: false,
+          href: '/'
         },
         {
           icon: 'assignment_turned_in',
@@ -51,12 +81,31 @@ export default {
           title: 'Our Contact info',
           active: false
         }
-      ]
+      ],
+      login: [
+        {
+          title: '구글 로그인',
+          href: "http://localhost:8080/oauth2/authorization/google"
+        },
+        {
+          title: '네이버 로그인',
+          href: "http://localhost:8080/oauth2/authorization/naver"
+        },
+      ],
+      client: {}
     }
+  },
+  methods:{
+    load: function () {
+      this.$http.get("/auth/client").then((res) => {
+        this.client = res.data;
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  },
+  mounted() {
+    this.load();
   }
 }
 </script>
-
-<style scoped>
-
-</style>

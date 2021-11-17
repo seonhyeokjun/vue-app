@@ -30,9 +30,10 @@
       ></v-textarea>
       <v-btn
           class="mr-4"
-          @click="idx !== undefined ? update() : submit()"
+          color="primary"
+          @click="submit()"
       >
-        {{ idx !== undefined ? '수정' : '작성' }}
+        {{ '작성' }}
       </v-btn>
       <v-btn @click="clear">
         초기화
@@ -53,15 +54,8 @@ export default {
     author: { required },
     content: { required }
   },
-  mounted() {
-    if(this.$route.params.data !== undefined){
-      this.detail();
-    }
-  },
   data() {
-    const idx = this.$route.params.data;
     return {
-      idx: idx,
       title: '',
       author: '',
       content: '',
@@ -112,28 +106,6 @@ export default {
       this.title = '';
       this.author = '';
       this.content = '';
-    },
-    detail(){
-      this.$http.get('/api/board/' + this.$route.params.data).then((res) => {
-        this.title = res.data.title;
-        this.author = res.data.author;
-        this.content = res.data.content;
-      })
-    },
-    update() {
-      this.$http.put("/api/board/" + this.$route.params.data, {
-        title: this.title,
-        author: this.author,
-        content: this.content,
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.$router.push({
-          path: '/'
-        });
-      },() => {
-        console.log('실패');
-      })
     }
   }
 }
