@@ -1,49 +1,72 @@
 <template>
   <div id="Detail">
+    <main-header></main-header>
     <v-container>
       <v-text-field
-          label="제목"
-          v-model="title"
-          disabled
+        label="제목"
+        v-model="title"
+        disabled
       ></v-text-field>
       <v-text-field
-          label="작성자"
-          v-model="author"
-          disabled
+        label="작성자"
+        v-model="author"
+        disabled
       ></v-text-field>
       <v-textarea
-          background-color="grey lighten-2"
-          color="cyan"
-          label="내용"
-          v-model="content"
-          disabled
+        background-color="grey lighten-2"
+        color="cyan"
+        label="내용"
+        v-model="content"
+        disabled
       ></v-textarea>
       <v-btn
+        class="mr-4"
         color="success"
         @click="update()"
       >
-        수정
+        {{ '수정' }}
       </v-btn>
-
+      <v-btn
+        class="mr-4"
+        color="error"
+        @click="remove()"
+      >
+        {{ '삭제' }}
+      </v-btn>
+      <v-btn
+        color="error"
+        href="/"
+      >
+        {{ '목록' }}
+      </v-btn>
       <v-btn
           color="error"
-          @click="remove()"
+          href="http://localhost:8080/api/file/24"
+          download
       >
-        삭제
+        첨부파일
       </v-btn>
     </v-container>
+    <main-footer></main-footer>
   </div>
 </template>
 
 <script>
+import MainHeader from "./layout/MainHeader";
+import MainFooter from "./layout/MainFooter";
+
 export default {
   name: "Detail",
+  components:{
+    'main-header' : MainHeader,
+    'main-footer' : MainFooter,
+  },
   created() {
     this.$http.get('/api/board/' + this.$route.params.data).then((res) => {
       this.title = res.data.title;
       this.author = res.data.author;
       this.content = res.data.content;
-    })
+    });
   },
   data(){
     return{

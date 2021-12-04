@@ -12,7 +12,7 @@ module.exports = {
                 logLevel: 'debug',
             }
         },
-        port: 3000
+        port: 3000,
     },
 
     transpileDependencies: [

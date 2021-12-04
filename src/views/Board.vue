@@ -32,11 +32,12 @@
           tile
           color="success"
           :href="`/create`"
+          v-if="JSON.stringify(client) !== '{}'"
       >
         <v-icon left>
           mdi-pencil
         </v-icon>
-        Edit
+        {{ '작성' }}
       </v-btn>
       <div class="text-center">
         <v-pagination
@@ -69,7 +70,7 @@ export default {
     this.$http.get("/api/board/list").then((response) => {
       this.board = response.data.content;
       this.totalPages = response.data.totalPages;
-    })
+    });
   },
   data(){
     return{
@@ -91,9 +92,14 @@ export default {
           value : 'author'
         },
         {
-          text : '닐찌',
+          text : '날짜',
           sortable : false,
           value : 'createdDate'
+        },
+        {
+          text: '조회수',
+          sortable: false,
+          value: 'hit'
         }
       ],
       board: [],
@@ -102,10 +108,14 @@ export default {
       page: 1,
       totalPages: 0,
       itemsPerPage: 10,
+      client: {}
     };
   },
   computed: {
 
+  },
+  mounted() {
+    this.load();
   },
   methods:{
     boardSearch: function () {
@@ -133,6 +143,13 @@ export default {
     },
     isEmptyArr: function (arr) {
       return Array.isArray(arr) && arr.length === 0;
+    },
+    load: function () {
+      this.$http.get("/auth/client").then((res) => {
+        this.client = res.data;
+      }).catch(error => {
+        console.log(error);
+      })
     }
   }
 }
