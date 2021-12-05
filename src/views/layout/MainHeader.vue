@@ -32,14 +32,14 @@
                 :key="index"
                 link
                 :href="item.href"
-                v-if="JSON.stringify(client) === '{}'"
+                v-if="!$store.state.userInfo"
             >
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
             <v-list-item
               link
-              href="http://localhost:8080/logout"
-              v-if="JSON.stringify(client) !== '{}'"
+              @click="$store.dispatch('logout')"
+              v-if="$store.state.userInfo"
             >
               <v-list-item-title>로그아웃</v-list-item-title>
             </v-list-item>
@@ -90,22 +90,9 @@ export default {
         {
           title: '네이버 로그인',
           href: "http://localhost:8080/oauth2/authorization/naver"
-        },
-      ],
-      client: {}
+        }
+      ]
     }
-  },
-  methods:{
-    load: function () {
-      this.$http.get("/auth/client").then((res) => {
-        this.client = res.data;
-      }).catch(error => {
-        console.log(error);
-      })
-    }
-  },
-  mounted() {
-    this.load();
   }
 }
 </script>

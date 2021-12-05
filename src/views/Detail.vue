@@ -46,6 +46,7 @@
       >
         첨부파일
       </v-btn>
+      <Disqus shortname='your_shortname_disqus' />
     </v-container>
     <main-footer></main-footer>
   </div>
@@ -54,12 +55,14 @@
 <script>
 import MainHeader from "./layout/MainHeader";
 import MainFooter from "./layout/MainFooter";
+import { Disqus } from "vue-disqus";
 
 export default {
   name: "Detail",
   components:{
-    'main-header' : MainHeader,
-    'main-footer' : MainFooter,
+    MainHeader,
+    MainFooter,
+    Disqus
   },
   created() {
     this.$http.get('/api/board/' + this.$route.params.data).then((res) => {
@@ -72,7 +75,7 @@ export default {
     return{
       title: this.title,
       author: this.author,
-      content: this.content
+      content: this.content,
     }
   },
   methods: {

@@ -32,12 +32,12 @@
           tile
           color="success"
           :href="`/create`"
-          v-if="JSON.stringify(client) !== '{}'"
+          v-if="$store.state.userInfo"
       >
         <v-icon left>
           mdi-pencil
         </v-icon>
-        {{ '작성' }}
+        작성
       </v-btn>
       <div class="text-center">
         <v-pagination
@@ -107,18 +107,11 @@ export default {
       alert: false,
       page: 1,
       totalPages: 0,
-      itemsPerPage: 10,
-      client: {}
+      itemsPerPage: 10
     };
   },
-  computed: {
-
-  },
-  mounted() {
-    this.load();
-  },
   methods:{
-    boardSearch: function () {
+    boardSearch () {
       if(this.search !== ''){
         this.$http.get("/api/board/search?keyword=" + this.search).then((res) => {
           console.log(res.data === []);
@@ -141,15 +134,8 @@ export default {
         })
       }
     },
-    isEmptyArr: function (arr) {
+    isEmptyArr (arr) {
       return Array.isArray(arr) && arr.length === 0;
-    },
-    load: function () {
-      this.$http.get("/auth/client").then((res) => {
-        this.client = res.data;
-      }).catch(error => {
-        console.log(error);
-      })
     }
   }
 }
