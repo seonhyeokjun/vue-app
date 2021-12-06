@@ -65,19 +65,19 @@
           color="primary"
           @click="submit()"
         >
-          {{ '작성' }}
+          작성
         </v-btn>
         <v-btn
           class="mr-4"
           color="error"
           href="/"
         >
-          {{ '취소' }}
+          취소
         </v-btn>
         <v-btn
           @click="clear"
         >
-          {{ '초기화' }}
+          초기화
         </v-btn>
       </v-form>
     </v-container>

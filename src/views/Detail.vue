@@ -20,32 +20,47 @@
         disabled
       ></v-textarea>
       <v-btn
+          v-for="item in files"
+          :key="item.id"
+          :href="`http://localhost:8080/api/download/` + item.id"
+          color="blue-grey"
+          class="ma-2 white--text"
+      >
+        {{ item.realFilename }}
+        <v-icon
+            right
+            dark
+        >
+          mdi-cloud-download
+        </v-icon>
+      </v-btn>
+      <v-btn
         class="mr-4"
         color="success"
         @click="update()"
       >
-        {{ '수정' }}
+        수정
       </v-btn>
       <v-btn
         class="mr-4"
         color="error"
         @click="remove()"
       >
-        {{ '삭제' }}
+        삭제
       </v-btn>
       <v-btn
         color="error"
         href="/"
       >
-        {{ '목록' }}
+        목록
       </v-btn>
-      <v-btn
-          color="error"
-          href="http://localhost:8080/api/file/24"
-          download
-      >
-        첨부파일
-      </v-btn>
+<!--      <v-btn-->
+<!--          color="error"-->
+<!--          href="http://localhost:8080/api/download/24"-->
+<!--          download-->
+<!--      >-->
+<!--        첨부파일-->
+<!--      </v-btn>-->
       <Disqus shortname='your_shortname_disqus' />
     </v-container>
     <main-footer></main-footer>
@@ -70,12 +85,18 @@ export default {
       this.author = res.data.author;
       this.content = res.data.content;
     });
+
+    this.$http.get('/api/file/' + this.$route.params.data).then((res) => {
+      console.log(res.data);
+      this.files = res.data;
+    });
   },
   data(){
     return{
       title: this.title,
       author: this.author,
       content: this.content,
+      files: {}
     }
   },
   methods: {
