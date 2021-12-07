@@ -54,14 +54,7 @@
       >
         목록
       </v-btn>
-<!--      <v-btn-->
-<!--          color="error"-->
-<!--          href="http://localhost:8080/api/download/24"-->
-<!--          download-->
-<!--      >-->
-<!--        첨부파일-->
-<!--      </v-btn>-->
-      <Disqus shortname='your_shortname_disqus' />
+      <Disqus shortname='seonhyeokjun' />
     </v-container>
     <main-footer></main-footer>
   </div>
