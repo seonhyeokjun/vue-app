@@ -17,6 +17,7 @@
           :error-messages="authorErrors"
           label="작성자"
           required
+          disabled
           @input="$v.author.$touch()"
           @blur="$v.author.$touch()"
         ></v-text-field>
@@ -103,6 +104,12 @@ export default {
     'main-header' : MainHeader,
     'main-footer' : MainFooter
   },
+  created() {
+    this.$http.get('/auth/client').then((res) => {
+      console.log(res.data);
+      this.author = res.data.userName;
+    });
+  },
   data() {
     return {
       title: '',
@@ -165,7 +172,6 @@ export default {
     clear(){
       this.$v.$reset();
       this.title = '';
-      this.author = '';
       this.content = '';
     }
   }
