@@ -54,6 +54,28 @@
       >
         목록
       </v-btn>
+      <v-col
+          cols="12"
+          sm="3"
+      >
+        <v-btn
+            v-model="like"
+            icon
+            color="pink"
+            v-if="like === 1"
+            @click="likes()"
+        >
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
+        <v-btn
+            v-model="like"
+            icon
+            v-if="like === 0"
+            @click="likes()"
+        >
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
+      </v-col>
       <Disqus shortname='seonhyeokjun' />
     </v-container>
     <main-footer></main-footer>
@@ -80,15 +102,19 @@ export default {
     });
 
     this.$http.get('/api/file/' + this.$route.params.data).then((res) => {
-      console.log(res.data);
       this.files = res.data;
     });
+
+    this.$http.get('/api/like/' + this.$route.params.data).then((res) => {
+      this.like = res.data;
+    })
   },
   data(){
     return{
       title: this.title,
       author: this.author,
       content: this.content,
+      like: this.like,
       files: {}
     }
   },
@@ -115,6 +141,11 @@ export default {
       }, () => {
         console.log('실패');
       })
+    },
+    likes(){
+      this.$http.put("/api/like/" + this.$route.params.data).then((res) => {
+        this.like = res.data;
+      });
     }
   }
 }
