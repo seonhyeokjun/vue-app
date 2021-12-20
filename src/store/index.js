@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userInfo: null
+    userInfo: null,
+    loginCheck: null
   },
   getters: {},
   mutations: {
@@ -25,6 +26,7 @@ export default new Vuex.Store({
       }
     },
     logout({ commit }) {
+      window.location = "http://localhost:8080/logout";
       commit("SET_USER_INFO", null);
     }
   }

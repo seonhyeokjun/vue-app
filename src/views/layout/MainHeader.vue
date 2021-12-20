@@ -37,6 +37,13 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
             <v-list-item
+                link
+                @click=""
+                v-if="$store.state.userInfo"
+            >
+              <v-list-item-title>마이페이지</v-list-item-title>
+            </v-list-item>
+            <v-list-item
               link
               @click="$store.dispatch('logout')"
               v-if="$store.state.userInfo"
