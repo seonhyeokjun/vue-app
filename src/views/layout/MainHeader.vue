@@ -78,9 +78,10 @@ export default {
         },
         {
           icon: 'assignment_turned_in',
-          text: 'Todos',
+          text: '채팅',
           title: 'Some stuff that needs doing',
-          active: false
+          active: false,
+          href: '/chat'
         },
         {
           icon: 'email',

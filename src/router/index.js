@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Create from "../views/Create";
 import Board from "../views/Board";
 import Detail from "../views/Detail";
+import Chat from "../views/Chat"
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/detail/:data',
     name: 'Detail',
     component: Detail
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    component: Chat
   }
 ]
 
