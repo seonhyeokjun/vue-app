@@ -2,7 +2,13 @@
   <div id="Chat">
     <main-header></main-header>
     <v-container>
-
+      <v-card>
+        <v-data-table
+            :headers="headers"
+            :items="desserts"
+            hide-default-footer
+        ></v-data-table>
+      </v-card>
     </v-container>
     <main-footer></main-footer>
   </div>
@@ -27,6 +33,21 @@ export default {
   },
   data(){
     return {
+      headers: [
+        {
+          text: '번호',
+          align: 'center',
+          sortable: false,
+          value: 'id'
+        },
+        {
+          text: '채팅방 이름',
+          align: 'center',
+          sortable: false,
+          value: ''
+        }
+      ],
+      desserts: [],
       rooms: []
     }
   },

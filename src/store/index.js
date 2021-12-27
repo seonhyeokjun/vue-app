@@ -26,7 +26,6 @@ export default new Vuex.Store({
       }
     },
     logout({ commit }) {
-      window.location = "http://localhost:8080/logout";
       commit("SET_USER_INFO", null);
     }
   }

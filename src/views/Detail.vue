@@ -62,19 +62,19 @@
             v-model="like"
             icon
             color="pink"
-            v-if="like === 1"
             @click="likes()"
         >
-          <v-icon>mdi-heart</v-icon>
+          <v-icon v-if="like">mdi-heart</v-icon>
+          <v-icon v-else>mdi-heart</v-icon>
         </v-btn>
-        <v-btn
-            v-model="like"
-            icon
-            v-if="like === 0"
-            @click="likes()"
-        >
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
+<!--        <v-btn-->
+<!--            v-model="like"-->
+<!--            icon-->
+<!--            v-if="like === 0"-->
+<!--            @click="likes()"-->
+<!--        >-->
+<!--          <v-icon>mdi-heart</v-icon>-->
+<!--        </v-btn>-->
       </v-col>
       <Disqus shortname='seonhyeokjun' />
     </v-container>
