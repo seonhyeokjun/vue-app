@@ -2,10 +2,25 @@
   <div id="Chat">
     <main-header></main-header>
     <v-container>
+      <v-form v-model="valid" ref="form" lazy-validation>
+        <v-text-field
+            label="Title"
+            v-model="title"
+            :rules="titleRules"
+            :counter="10"
+            required
+        ></v-text-field>
+        <v-btn
+            @click="submit"
+            :disabled="!valid"
+        >
+          submit
+        </v-btn>
+      </v-form>
       <v-card>
         <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="rooms"
             hide-default-footer
         ></v-data-table>
       </v-card>
@@ -27,7 +42,8 @@ export default {
     'main-footer' : MainFooter
   },
   created() {
-    this.$http.get('/chat/room').then((res) => {
+    this.$http.get('/chat/rooms').then((res) => {
+      console.log(res.data);
       this.rooms = res.data;
     });
   },
@@ -44,16 +60,30 @@ export default {
           text: '채팅방 이름',
           align: 'center',
           sortable: false,
-          value: ''
+          value: 'roomName'
         }
       ],
-      desserts: [],
-      rooms: []
+      rooms: [],
+      title: '',
+      titleRules: [
+        //v => !!v || 'Name is required',
+        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      ],
+      valid: true,
     }
   },
   methods:{
-    createRoom(){
-      this.$http.post('/chat/room').then(() => {
+    submit(){
+      let data = {
+        roomName: this.title
+      };
+
+      this.$http.post('/chat/room', JSON.stringify(data), {
+        headers:{
+          "Content-Type": 'application/json'
+        }
+      }).then((res) => {
+        console.log(res.data);
 
       });
     }

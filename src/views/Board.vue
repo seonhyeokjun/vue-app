@@ -67,7 +67,7 @@ export default {
     'main-footer' : MainFooter
   },
   created() {
-    this.$http.get("/api/board/list").then((response) => {
+    this.$http.get("/api/board").then((response) => {
       this.board = response.data.content;
       this.totalPages = response.data.totalPages;
     });

@@ -10,6 +10,11 @@ module.exports = {
                 target: 'http://localhost:8080',
                 changeOrigin: true,
                 logLevel: 'debug',
+            },
+            '/chat/room':{
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+                logLevel: 'debug'
             }
         },
         port: 3000,
