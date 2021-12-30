@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Create from "../views/Create";
 import Board from "../views/Board";
 import Detail from "../views/Detail";
-import Chat from "../views/Chat"
+import ChatRoom from "../views/chat/ChatRoom"
 
 Vue.use(VueRouter)
 
@@ -24,9 +24,9 @@ const routes = [
     component: Detail
   },
   {
-    path: '/chat',
-    name: 'Chat',
-    component: Chat
+    path: '/chatroom',
+    name: 'ChatRoom',
+    component: ChatRoom
   }
 ]
 

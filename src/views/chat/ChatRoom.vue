@@ -1,18 +1,18 @@
 <template>
-  <div id="Chat">
+  <div id="ChatRoom">
     <main-header></main-header>
     <v-container>
       <v-form v-model="valid" ref="form" lazy-validation>
         <v-text-field
-            label="Title"
-            v-model="title"
-            :rules="titleRules"
-            :counter="10"
-            required
+          label="Title"
+          v-model="title"
+          :rules="titleRules"
+          :counter="10"
+          required
         ></v-text-field>
         <v-btn
-            @click="submit"
-            :disabled="!valid"
+          @click="submit"
+          :disabled="!valid"
         >
           submit
         </v-btn>
@@ -30,13 +30,11 @@
 </template>
 
 <script>
-import Stomp from "webstomp-client";
-import SockJs from "sockjs-client"
-import MainHeader from "./layout/MainHeader";
-import MainFooter from "./layout/MainFooter";
+import MainHeader from "../layout/MainHeader";
+import MainFooter from "../layout/MainFooter";
 
 export default {
-  name: "Chat",
+  name: "ChatRoom",
   components:{
     'main-header' : MainHeader,
     'main-footer' : MainFooter
@@ -74,17 +72,15 @@ export default {
   },
   methods:{
     submit(){
-      let data = {
+      const data = {
         roomName: this.title
       };
-
       this.$http.post('/chat/room', JSON.stringify(data), {
         headers:{
           "Content-Type": 'application/json'
         }
       }).then((res) => {
-        console.log(res.data);
-
+        location.reload();
       });
     }
   }

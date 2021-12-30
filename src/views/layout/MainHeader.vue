@@ -81,7 +81,7 @@ export default {
           text: '채팅',
           title: 'Some stuff that needs doing',
           active: false,
-          href: '/chat'
+          href: '/chatroom'
         },
         {
           icon: 'email',
