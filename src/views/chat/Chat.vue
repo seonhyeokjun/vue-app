@@ -70,6 +70,8 @@ function connect(){
         connect();
       }, 10*1000);
     }
-  })
+  });
 }
+
+connect();
 </script>
