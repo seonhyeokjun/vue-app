@@ -82,6 +82,14 @@ export default {
       }).then((res) => {
         location.reload();
       });
+    },
+    enterRoom(roomId){
+      const sender = prompt('대화명을 입력해 주세요.');
+      if (sender !== ''){
+        localStorage.setItem('wschat.sender', sender);
+        localStorage.setItem('wschat.roomId', roomId);
+        location.href='/chat/room/enter/' + roomId;
+      }
     }
   }
 }
