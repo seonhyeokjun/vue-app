@@ -1,8 +1,10 @@
 <template>
   <div id="Chat">
+    <main-header></main-header>
     <v-container>
-
+      <h2>{{ room.roomName }}</h2>
     </v-container>
+    <main-footer></main-footer>
   </div>
 </template>
 
@@ -38,17 +40,21 @@ export default {
   },
   methods: {
     findRoom(){
-      this.$http.get('/chat/room' + this.roomId).then((res) => {
+      this.$http.get('/chat/room/' + this.roomId).then((res) => {
+        console.log(res.data);
         this.room = res.data;
       })
     },
     sendMessage(){
       ws.send('/pub/chat/message',
-          {}, JSON.stringify({type:'TALK', roomId:this.roomId, sender:this.sender, message:this.message}));
+          {},
+          JSON.stringify({type:'TALK', roomId:this.roomId, sender:this.sender, message:this.message}));
       this.message = '';
     },
     recvMessage(recv){
-      this.message.unshift({"type":recv.type,"sender":recv.type=='ENTER'?'[알림]':recv.sender,"message":recv.message});
+      this.message.unshift(
+          {"type":recv.type,"sender":recv.type=='ENTER'?'[알림]':recv.sender,"message":recv.message}
+      );
     }
   }
 }

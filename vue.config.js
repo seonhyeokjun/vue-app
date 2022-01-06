@@ -11,7 +11,7 @@ module.exports = {
                 changeOrigin: true,
                 logLevel: 'debug',
             },
-            '/chat/room':{
+            '/chat':{
                 target: 'http://localhost:8080',
                 changeOrigin: true,
                 logLevel: 'debug'

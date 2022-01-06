@@ -19,10 +19,20 @@
       </v-form>
       <v-card>
         <v-data-table
-            :headers="headers"
-            :items="rooms"
-            hide-default-footer
-        ></v-data-table>
+          dark
+          :headers="headers"
+          :items="rooms"
+          hide-default-footer
+        >
+          <template #item.roomName="{ item }">
+            <router-link
+              @click="enterRoom(item.id)"
+              :to="{ name : 'Chat', params: {data : item.id} } "
+            >
+              {{ item.roomName }}
+            </router-link>
+          </template>
+        </v-data-table>
       </v-card>
     </v-container>
     <main-footer></main-footer>
