@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
     "sockjs-client": "^1.5.2",
     "update": "^0.7.4",
     "vue": "^2.6.11",

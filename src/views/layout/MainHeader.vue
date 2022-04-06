@@ -1,38 +1,38 @@
 <template>
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
-      dense
-      dark
+        color="deep-purple accent-4"
+        dense
+        dark
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>제목</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn
-          v-for="item in nav"
-          :key="item.icon"
-          :href="item.href"
-          :title="item.title"
-          text
+            v-for="item in nav"
+            :key="item.icon"
+            :href="item.href"
+            :title="item.title"
+            text
         >{{ item.text }}</v-btn>
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              text
-              v-bind="attrs"
-              v-on="on"
+                text
+                v-bind="attrs"
+                v-on="on"
             >
               메뉴
             </v-btn>
           </template>
           <v-list>
             <v-list-item
-              v-for="(item, index) in login"
-              :key="index"
-              link
-              :href="item.href"
-              v-if="!$store.state.userInfo"
+                v-for="(item, index) in login"
+                :key="index"
+                link
+                :href="item.href"
+                v-if="!$store.state.userInfo"
             >
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
@@ -44,9 +44,9 @@
               <v-list-item-title>마이페이지</v-list-item-title>
             </v-list-item>
             <v-list-item
-              link
-              @click="$store.dispatch('logout')"
-              v-if="$store.state.userInfo"
+                link
+                @click="$store.dispatch('logout')"
+                v-if="$store.state.userInfo"
             >
               <v-list-item-title>로그아웃</v-list-item-title>
             </v-list-item>
@@ -64,29 +64,26 @@ export default {
     return{
       nav: [
         {
-          icon: 'home',
-          text: 'Home',
-          title: 'Back to Home page',
-          active: true,
-        },
-        {
-          icon: 'info',
-          text: '게시판',
-          title: 'About this demo',
+          icon: 'login',
+          text: '로그인',
           active: false,
           href: '/'
         },
         {
+          icon: 'info',
+          text: '게시판',
+          active: false,
+          href: '/board'
+        },
+        {
           icon: 'assignment_turned_in',
           text: '채팅',
-          title: 'Some stuff that needs doing',
           active: false,
           href: '/chatroom'
         },
         {
           icon: 'email',
           text: 'Contact',
-          title: 'Our Contact info',
           active: false
         }
       ],

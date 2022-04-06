@@ -5,11 +5,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
-  name: 'App',
-  created() {
-    this.$store.dispatch("login");
-  }
+  name: 'App'
 };
 </script>

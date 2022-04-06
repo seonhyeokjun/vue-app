@@ -24,9 +24,6 @@ export default new Vuex.Store({
       } catch (error) {
         // error handling
       }
-    },
-    logout({ commit }) {
-      commit("SET_USER_INFO", null);
     }
   }
 })

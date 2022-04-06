@@ -5,14 +5,15 @@ import Board from "../views/Board";
 import Detail from "../views/Detail";
 import ChatRoom from "../views/chat/ChatRoom";
 import Chat from "../views/chat/Chat";
+import Login from "../views/Login";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Board',
-    component: Board
+    name: 'Login',
+    component: Login
   },
   {
     path: '/create/:data?',
@@ -33,6 +34,11 @@ const routes = [
     path: '/chat/:data',
     name: 'Chat',
     component: Chat
+  },
+  {
+    path: '/board',
+    name: 'Board',
+    component: Board
   }
 ]
 
@@ -40,6 +46,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((from, to, next) => {
+  console.log("form", from);
+  console.log("to", to);
+  console.log("next", next);
+  next();
+});
 
 export default router
