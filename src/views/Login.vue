@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
   export default {
     name: 'Login',
     data () {
@@ -34,6 +35,12 @@
           id: '',
           pwd: ''
         }
+      }
+    },
+    methods: {
+      ...mapActions(["login"]),
+      signIn() {
+        this.login(this.form);
       }
     }
   }

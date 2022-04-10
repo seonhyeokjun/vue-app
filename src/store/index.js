@@ -17,10 +17,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async login({ commit }) {
+    async login({ commit }, payload) {
+      const { id, pwd } = payload;
+
       try {
         const res = await axios.get("/auth/client");
         commit("SET_USER_INFO", res.data);
+        // router.push(home 으로 이동하기)
       } catch (error) {
         // error handling
       }
