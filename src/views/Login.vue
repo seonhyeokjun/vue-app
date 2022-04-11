@@ -10,11 +10,12 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
-                <v-text-field prepend-icon="person" v-model="form.id" label="아이디" type="text"></v-text-field>
-                <v-text-field prepend-icon="lock" v-model="form.pwd" label="비밀번호" type="password"></v-text-field>
+                <v-text-field prepend-icon="mdi-account" v-model="form.id" label="아이디 / 이메" type="text"></v-text-field>
+                <v-text-field prepend-icon="mdi-lock" v-model="form.pwd" label="비밀번호" type="password"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
+              <v-btn color="secondary" @click="$router.push('/signup')">회원가입</v-btn>
               <v-spacer></v-spacer>
               <v-btn color="primary" @click="signIn">로그인</v-btn>
             </v-card-actions>

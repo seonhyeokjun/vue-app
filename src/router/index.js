@@ -6,6 +6,7 @@ import Detail from "../views/Detail";
 import ChatRoom from "../views/chat/ChatRoom";
 import Chat from "../views/chat/Chat";
 import Login from "../views/Login";
+import SignUp from "../views/SignUp";
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/board',
     name: 'Board',
     component: Board
+  },
+  {
+    path: "/signup",
+    name: 'SignUp',
+    component: SignUp
   }
 ]
 
