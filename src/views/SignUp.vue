@@ -29,11 +29,12 @@
                     label="Email"
                     name="email"
                     prepend-icon="mdi-email"
-                    type="text"
                     v-model="email"
+                    required
+                    type="text"
                     :error-messages="emailErrors"
-                    @input="$v.author.$touch()"
-                    @blur="$v.author.$touch()"
+                    @input="$v.email.$touch()"
+                    @blur="$v.email.$touch()"
                 ></v-text-field>
 
                 <v-text-field
@@ -96,6 +97,10 @@ import { required, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   name: "SignUp",
+  mixins: [validationMixin],
+  validations : {
+    email: {required}
+  },
   data: () => ({
     email : '',
     name : '',

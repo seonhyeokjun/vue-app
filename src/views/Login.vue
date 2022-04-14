@@ -10,8 +10,8 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
-                <v-text-field prepend-icon="mdi-account" v-model="form.id" label="아이디 / 이메" type="text"></v-text-field>
-                <v-text-field prepend-icon="mdi-lock" v-model="form.pwd" label="비밀번호" type="password"></v-text-field>
+                <v-text-field prepend-icon="mdi-account" v-model="form.email" label="아이디 / 이메일" type="text"></v-text-field>
+                <v-text-field prepend-icon="mdi-lock" v-model="form.password" label="비밀번호" type="password"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
@@ -33,15 +33,29 @@ import { mapActions } from "vuex";
     data () {
       return {
         form: {
-          id: '',
-          pwd: ''
+          email: '',
+          password: ''
         }
       }
     },
     methods: {
-      ...mapActions(["login"]),
+      // ...mapActions(["login"]),
       signIn() {
-        this.login(this.form);
+        // this.login(this.form);
+        const axiosConfig = {
+          headers:{
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+        let form = new FormData();
+        form.append("email", this.form.email);
+        form.append("password", this.form.password);
+
+        this.$http.post('/login', form, axiosConfig).then((res) => {
+          console.log(res.data);
+        }, () => {
+          console.log('실패');
+        })
       }
     }
   }

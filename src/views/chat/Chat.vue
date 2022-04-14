@@ -79,5 +79,5 @@ function connect(){
   });
 }
 
-connect();
+//connect();
 </script>
